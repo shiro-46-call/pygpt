@@ -1,0 +1,9 @@
+2024-07-18 13:13:45,INFO,"HelloWorld.py",0.06920790672302246
+2024-07-18 13:14:58,ERROR,"divide_by_zero.py",12.826584100723267,"Traceback (most recent call last):
+  File ""/Users/yuto.s/pygpt/src/pygpt/divide_by_zero.py"", line 6, in <module>
+    divide_by_zero()
+  File ""/Users/yuto.s/pygpt/src/pygpt/divide_by_zero.py"", line 3, in divide_by_zero
+    return 10 / 0
+           ~~~^~~
+ZeroDivisionError: division by zero
+"

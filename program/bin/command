@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# 自動更新機能
+cd ~/.pygpt
+git pull origin main
+
+# プログラムの実行
+python3 "$(dirname "$0")/../Example.py" "$@"
