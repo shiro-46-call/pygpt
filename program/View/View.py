@@ -15,7 +15,7 @@ class View:
     'pygpt'のビュークラスです。
     ターミナル上での表示の部分の処理を担当します。
     """
-    def show_result(self, error_text, result):
+    def show_result_error(self, error_text, result):
         """
         ChatGPT APIから返ってきたJSONファイルを解析し、ユーザーに見やすい形式でターミナルに表示するメソッド
         """
@@ -36,6 +36,9 @@ class View:
                 print(f"{Fore.RED}エラー:応答データから必要な情報を見つけられませんでした ({e}).{Style.RESET_ALL}")
             except Exception as e:
                 print(f"{Fore.RED}予期せぬエラーが発生しました: {e}{Style.RESET_ALL}")
+
+    def show_result(self, result):
+        print(result)
 
     def format_message(self, message):
         """
