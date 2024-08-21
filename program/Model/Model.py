@@ -23,21 +23,22 @@ class Model:
         self.program_text = None  # プログラムのテキスト
         self.compile_flag = False  # コンパイル結果のフラグ
         self.error_text = None  # コンパイルエラー文
-        self.result = None  # APIの結果
+        self.api_result = None  # APIの結果
+        self.result_text = None  # 実行の結果
 
     def controller(self, program):
         """
         各クラスに処理の実行の指示を送信する
         """
         try:
-            self.compile_flag, self.error_text = self.compile.execution(program, self.compile_flag)
+            self.compile_flag, self.result_text = self.compile.execution(program, self.compile_flag)
             if not self.compile_flag:
-                self.result = ()
-                return self.error_text, tuple(self.result)
+                self.api_result = ()
+                return self.result_text, self.api_result, self.compile_flag
 
             self.program_text = self.convert_text(program)
-            self.result = self.api.request(self.program_text, self.error_text)
-            return self.error_text, self.result
+            self.api_result = self.api.request(self.program_text, self.error_text)
+            return self.result_text, self.api_result, self.compile_flag
 
         except Exception as e:
             raise Exception(f"An error occurred: {e}")

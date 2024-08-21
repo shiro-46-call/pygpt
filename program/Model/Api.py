@@ -44,7 +44,14 @@ class Api:
                 ],
                 # max_tokens=150
             )
-            return response.to_dict()
+
+            response_dict = response.to_dict()
+
+            if response_dict.get('error') and response_dict['error'].get('code') == 429:
+                print("APIリクエストの制限に達しました。少し時間をおいてください。")
+                return None
+
+            return response_dict
 
         except Exception as e:
             print(f"Failed to retrieve response from OpenAI: {e}")

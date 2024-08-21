@@ -19,15 +19,18 @@ class Compile:
         Compileの初期化
         """
         self.error_text = None
+        self.output_text = None
 
     def execution(self, program, compile_flag=False):
         """入力されたプログラムを実行し、エラーが起きるか確認する"""
-        self.error_text = subprocess.run(['python3', program],
+        result = subprocess.run(['python3', program],
                                          text=True, capture_output=True)
 
-        if self.error_text.returncode != 0:
+        if result.returncode != 0:
             compile_flag = True
-            return compile_flag, self.error_text.stderr
+            self.error_text = result.stderr
+            return compile_flag, self.error_text
         else:
             compile_flag = False
-            return compile_flag, None
+            self.output_text = result.stdout
+            return compile_flag, self.output_text

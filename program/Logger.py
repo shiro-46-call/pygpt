@@ -26,8 +26,8 @@ class Logger:
 
         return logger
 
-    def log_execution(self, file_path, execution_time, error=None):
-        if error:
-            self.logger.error(f'"{file_path}",{execution_time},"{error.replace('"', '""')}"')
-        else:
-            self.logger.info(f'"{file_path}",{execution_time}')
+    def correct_log(self, file_path, execution_time, result=None):
+        self.logger.info(f'"{file_path}",{execution_time},"{result.replace('"', '""')}"')
+
+    def error_log(self, file_path, execution_time, error=None):
+        self.logger.error(f'"{file_path}",{execution_time},"{error.replace('"', '""')}"')

@@ -34,27 +34,23 @@ class Example:
         self.model = model
         self.view = view
         self.logger = logger
+        self.api_result = None
         self.result = None
-        self.error_text = None
+        self.compile_flag = False
 
     def model_controller(self):
         """
         Modelクラスに実行の指示を送信する
         """
         start_time = time.time()
-        self.error_text, self.result = self.model.controller(self.program)
+        self.result, self.api_result, self.compile_flag = self.model.controller(self.program)
         execution_time = time.time() - start_time
-        if not self.result:
-            self.logger.log_execution(self.program, execution_time, self.error_text)
+        if not self.compile_flag:
+            self.logger.correct_log(self.program, execution_time, self.result)
+            self.view.show_result(self.result)
             return
-        self.view_controller(self.error_text, self.result)
-        self.logger.log_execution(self.program, execution_time, self.error_text)
-
-    def view_controller(self, error_text, result):
-        """
-        Viewクラスに実行の指示を送信する
-        """
-        self.view.show_result(error_text, result)
+        self.view.show_result_error(self.result, self.api_result)
+        self.logger.error_log(self.program, execution_time, self.result)
 
 
 def valid_file(parser, arg):
