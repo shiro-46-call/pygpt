@@ -55,13 +55,14 @@ class Example:
 
 def valid_file(parser, arg):
     """
-    ファイルの拡張子が.pyかどうかを確認する
+    ファイルの拡張子が.pyかどうかを確認し、絶対パスを取得する
     """
-    if not os.path.exists(arg):
-        parser.error(f"ファイル{arg}が存在しません。")
-    elif not arg.lower().endswith(('py')):
-        parser.error(f"ファイル{arg}はPythonファイルではありません。")
-    return arg
+    abs_path = os.path.abspath(arg)  # 絶対パスに変換
+    if not os.path.exists(abs_path):
+        parser.error(f"ファイル {abs_path} が存在しません。")
+    elif not abs_path.lower().endswith('.py'):
+        parser.error(f"ファイル {abs_path} はPythonファイルではありません。")
+    return abs_path  # 絶対パスを返す
 
 
 if __name__ == '__main__':
