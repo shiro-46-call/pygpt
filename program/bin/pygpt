@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# リポジトリのルートディレクトリを取得
 DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-# プログラムの実行
 python3 "$DIR/Example.py" "$@"
