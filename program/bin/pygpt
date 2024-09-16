@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# リポジトリのルートディレクトリを取得
 DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-# 自動更新機能
-cd "$DIR"  # リポジトリのルートディレクトリに移動
-git pull origin main
-
-# プログラムの実行
 python3 "$DIR/Example.py" "$@"
