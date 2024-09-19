@@ -12,9 +12,9 @@ else
 fi
 
 if ! grep -q "$DIR/bin" "$PROFILE_FILE"; then
-    echo 'export PATH="'"$DIR"'/bin:$PATH"' >> "$PROFILE_FILE"
+    echo 'export PATH="'"$DIR"'program/bin:$PATH"' >> "$PROFILE_FILE"
 fi
 
 source "$PROFILE_FILE"
 
-echo "インストールが完了しました。ターミナルを再起動するか、'source $PROFILE_FILE'を実行して変更を適用してください。"
+echo "インストールが完了しました。"
